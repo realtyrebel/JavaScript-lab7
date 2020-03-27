@@ -1,0 +1,36 @@
+<html>
+<head>   
+</head>
+<body>
+<h3>JavaScript Events</h3>
+    
+<!--use an attribute to create an event-->
+<input id="b1" value="Click" onclick="alert('Hello!');" type="button"/>
+
+<!--call a function for an event-->
+
+    <script type="text/javascript">
+      function count_sheep() {
+        for(var i=1; i<=3; i++) {
+          alert(i+" sheep")
+        }
+      }
+    </script>
+<p><input type="button" onclick="count_sheep()" value="Counting Sheep"/></p>
+    
+<p><input id="PressMe" type="button" value="Press"/></p>
+      
+<p><input id="event" type="button" value="Click for two events"/></p>  
+       
+<p><button id="btn2">Mouse Events</button></p>
+        
+<p><input id="calc" type="button" value="Calculation" /></p>  
+    
+<p><input id="btn3" type="button" value="Event Object" /></p> 
+    
+<p><a href="http://google.com" target="_blank" id="link">Link</a></p>
+   
+<script src="/scripts/app.js"></script>
+<script src="/scripts/event.js"></script>
+</body>
+</html>

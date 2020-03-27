@@ -1,0 +1,156 @@
+<html>
+<head>
+ <title>Lab 7</title>   
+</head>
+<body>
+<h3>Having Fun with JavaScript Events</h3>
+    
+<p>Click on image to add to cart</p>
+<table>
+	<tr>
+    	<td>$1.50</td>
+        <td>$1.25</td>
+        <td>$1.00</td>
+        <td>$0.50</td>
+    </tr>
+    <tr>
+    	
+        <td><img id="img1" src="img/gum1.jpg"></td>
+        <td><img id="img2" src="img/gum2.jpg"></td>
+        <td><img id="img3" src="img/gum3.jpg"></td>
+        <td><img id="img4" src="img/gum4.jpg"></td>
+        <!--
+        <td><img src="img/gum1.jpg" onClick="cart.addProduct(0)"></td>
+        <td><img src="img/gum2.jpg" onClick="cart.addProduct(1)"></td>
+        <td><img src="img/gum3.jpg" onClick="cart.addProduct(2)"></td>
+        <td><img src="img/gum4.jpg" onClick="cart.addProduct(3)"></td>
+        -->
+    </tr>
+    <tr>
+    	<td colspan="3">Shopping Cart Items:</td>
+        <td><p id="items">0</p></td>
+    </tr>
+    <tr>
+    	<td colspan="2">Shopping Cart Total:</td>
+        <td align="right">$</td>
+        <td><p id="total">0</p></td>
+    </tr>
+    <tr>
+    	<td><button id="clear">Clear</button></td>
+    </tr>
+</table>
+<script type="text/javascript">
+
+//global variables
+var products = new Array();
+var count = 0;
+var total = 0;
+
+
+var cart = (function(){
+	'use strict';//protects against dangerous parts of JavaScript
+	
+	var brands = [
+		{
+			brand:"extra",
+			price:1.50
+		},
+		{
+			brand:"doublemint",
+			price:1.25
+		},
+		{
+			brand:"trident",
+			price:1.00
+		},
+		{
+			brand:"bubble gum",
+			price:0.50
+		}
+	];
+	
+	//alert(brands[0].brand);
+	//alert(brands[0].price);
+	
+	var addProduct = function(i) {
+		products.push(i);
+		//alert(products);
+		addPrice(i);
+		document.getElementById("total").innerHTML = total;
+		
+		count = products.length;
+		document.getElementById("items").innerHTML = count;
+	};
+	
+	var addPrice = function(i) {
+		total = total + brands[i].price;
+		return total;
+	};
+	
+	var clearCart = function() {
+		
+		products = new Array();
+		count = 0;
+		total = 0;
+		
+		document.getElementById("items").innerHTML = count;
+		document.getElementById("total").innerHTML = total;
+		//return total, count;
+	};
+	
+	//all public methods should be in here
+	return{
+		addProduct:addProduct,
+		clearCart:clearCart		
+	};
+})();
+
+document.getElementById("img1").addEventListener("click", function () {
+	cart.addProduct(0);
+	})
+document.getElementById("img2").addEventListener("click", function () {
+	cart.addProduct(1);
+	})
+document.getElementById("img3").addEventListener("click", function () {
+	cart.addProduct(2);
+	})
+document.getElementById("img4").addEventListener("click", function () {
+	cart.addProduct(3);
+	})
+document.getElementById("clear").addEventListener("click", cart.clearCart)
+/*
+for(var item of document.getElementsByClassName('item')){
+	item.addEventListener('click', function(e) {
+		var source = e.srcElement;
+		var id = source.getAttribute('id');
+		
+	})
+}
+*/
+/*
+//this does NOT work
+document.getElementById("img3").addEventListener("click", cart.addProduct(2))
+
+//this works
+document.getElementById("img1").addEventListener("click", function () {
+	cart.addProduct(0);
+	})
+
+OR
+//this works
+document.getElementById("img2").addEventListener("click", () => cart.addProduct(1))
+*/
+/*
+document.getElementById("img1").addEventListener("click", function (e) {
+	console.log(e);
+	})
+
+function () {}
+
+var a = function ();
+	
+var a = () => '';
+*/
+</script>
+</body>
+</html>

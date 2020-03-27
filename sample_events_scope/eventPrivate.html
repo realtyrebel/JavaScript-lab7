@@ -1,0 +1,115 @@
+<html>
+<head>
+    
+</head>
+<body>
+<h3>JavaScript Events</h3>
+<!--use an attribute to create an event-->
+<input id="b1" value="Click" onClick="alert('Fuck');" type="button"/>
+    
+<p><input type="button" onClick="count_sheep(5)" value="Counting Sheep"/></p>
+    
+<p><input id="PressMe" type="button" value="Press"/></p>
+      
+<p><input id="event" type="button" value="Click for two events"/></p>  
+       
+<p><button id="btn2">Mouse Events</button></p>
+        
+<p><input id="calc" type="button" value="Calculation" /></p>  
+
+<script type="text/javascript">
+function count_sheep(num) {
+	for(var i=1; i<=num; i++) {
+		alert(i+" sheep")
+	}
+}
+</script>
+
+<!-- <script src="scripts/appPrivate.js"></script> -->
+<script>
+/*using the module pattern to create a single variable in the global namespace and expose only public methods*/
+
+//global variables
+var numbers = new Array();
+var result = 0;
+
+//module
+var app =  (function() {
+    
+    //private variables
+    var PROMPT = 4;
+    var TITLE =  "Lab7";
+
+    var doSomething = function() {
+            alert("Hello");
+    };
+    
+    var sayHello = function() {
+            alert('Hello');
+    };
+    
+    var sayGoodBye = function() {
+            alert('GoodBye');
+    };
+    
+    var mouseOver = function() {
+            document.getElementById("btn2").innerHTML = "Moused over!<br>"
+    };
+    
+    var mouseOut =  function() {
+            document.getElementById("btn2").innerHTML = "Moused out!<br>"
+    };
+
+
+    var sum = function() {
+            //var result = 0;
+            var index = 4;
+            var numbers = getNumbers(index);
+            for(var i = 0; i < index; i++){
+                result += numbers[i];
+            }
+            alert("sum is: " + result);
+    };
+    
+	
+	
+    //private method
+    var getNumbers = function(index){
+
+            //var numbers = new Array();
+            var i = 0;
+            var max = index;
+            while(i < index){
+                var a = Number(prompt("Enter a number",""));    
+                numbers.push(a);
+                i++;
+            };    
+         return numbers;
+    };
+    
+    return {
+      doSomething : doSomething,
+      sayHello : sayHello,
+      sayGoodBye : sayGoodBye,
+      mouseOver : mouseOver,
+      mouseOut : mouseOut,
+      sum : sum     
+    };
+            
+})();
+</script>
+
+<!-- <script src="scripts/eventPrivate.js"></script> -->
+<script>
+document.getElementById('PressMe').addEventListener("click", app.doSomething);
+
+document.getElementById('event').addEventListener("click", app.sayHello);
+document.getElementById('event').addEventListener("click", app.sayGoodBye);
+
+document.getElementById('btn2').addEventListener("mouseover", app.mouseOver);
+document.getElementById('btn2').addEventListener("mouseout", app.mouseOut);
+
+document.getElementById('calc').addEventListener("click", app.sum);
+</script>
+</body>
+</html>
